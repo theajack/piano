@@ -1,0 +1,96 @@
+<template>
+    <div class='lyric-w'>
+        <div class='lyric-w-inner' :style='{"padding-bottom": `${offsetTop}px`, "padding-top": `${lyricTop}px`}' ref='scrollWrap'>
+            <div class='lyric-line' :class='{"active": scrollIndex === i}' v-for='(line, i) in lyric' :key='i'>
+                <div class='lyric-item'
+                     :class='{actived: item.index < currentIndex, active: item.index === currentIndex - 1}'
+                     v-for='(item, j) in line' :key='j'>
+                    <div class='lyric-word'>{{item.word}}</div>
+                    <div class='lyric-letter'>{{item.letter}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    import {EVENT} from '../util/constant';
+    import event from '../util/event';
+    import {mapState} from 'vuex';
+    export default {
+        name: 'lyric',
+        data () {
+            return {
+                lyric: [[]],
+                offsetTop: 55.6,
+                scrollIndex: 0,
+                scrollTop: 0,
+            };
+        },
+        computed: {
+            ...mapState('ui', [
+                'height'
+            ]),
+            ...mapState([
+                'currentIndex'
+            ]),
+            lyricTop () {
+                return (this.height * 0.4 - this.offsetTop) / 2;
+            }
+        },
+        mounted () {
+            event.regist(EVENT.LYRIC_CHANGE, ({word, letter}) => {
+                this.$store.commit('setCurrentIndex', 0);
+                let newArr = [];
+                let index = 0;
+                for (let i = 0; i < word.length; i++) {
+                    let item = word[i];
+                    let res = [];
+                    for (let j = 0; j < item.length; j++) {
+                        res.push({
+                            word: item[j],
+                            letter: letter[i][j],
+                            index
+                        });
+                        index++;
+                    }
+                    newArr.push(res);
+                }
+                this.lyric = newArr;
+            });
+            event.regist(EVENT.CURRENT_INDEX_CHANGE, () => {
+                this.checkScroll();
+            });
+        },
+        methods: {
+            checkScroll () {
+                let index = 0;
+                for (let i = 0; i < this.lyric.length; i++) {
+                    let line = this.lyric[i];
+                    if (line.length !== 0 && line[line.length - 1].index >= this.currentIndex) {
+                        index = i;
+                        break;
+                    }
+                }
+                if (this.scrollIndex !== index) {
+                    this.scrollIndex = index;
+                    let el = this.$refs.scrollWrap;
+                    let newTop = index * this.offsetTop;
+                    let per = (newTop - this.scrollTop) / 30;
+                    let i = 0;
+                    let interval = setInterval(() => {
+                        i ++;
+                        if (i === 30) {
+                            el.scrollTop = newTop;
+                            clearInterval(interval);
+                            this.scrollTop = newTop;
+                        } else {
+                            el.scrollTop += per;
+                        }
+                    }, 10);
+                }
+
+            },
+        }
+    };
+</script>
+
