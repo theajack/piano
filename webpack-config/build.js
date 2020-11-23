@@ -11,7 +11,7 @@ module.exports = () => {
         mode: 'production',
         entry: path.resolve('./', 'src'),
         output: {
-            path: path.resolve('./', 'cdn'),
+            path: path.resolve('./', 'docs'),
             filename: 'assets/js/index.min.js',
         },
         module: {
@@ -58,7 +58,7 @@ module.exports = () => {
                 filename: 'assets/css/[name].min.css',
             }),
             new HtmlWebpackPlugin({
-                template: './cdn/index.tpl.html',
+                template: './docs/index.tpl.html',
                 filename: 'index.html',
             }),
             new OptimizeCssAssetsPlugin()

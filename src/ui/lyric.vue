@@ -75,11 +75,18 @@
                     this.scrollIndex = index;
                     let el = this.$refs.scrollWrap;
                     let newTop = index * this.offsetTop;
-                    let per = (newTop - this.scrollTop) / 30;
+                    if (newTop === 0) {
+                        el.scrollTop = 0;
+                        this.scrollTop = 0;
+                        return;
+                    }
+                    let n = Math.abs(newTop - this.scrollTop);
+                    let per = 1;
+
                     let i = 0;
                     let interval = setInterval(() => {
                         i ++;
-                        if (i === 30) {
+                        if (i >= n) {
                             el.scrollTop = newTop;
                             clearInterval(interval);
                             this.scrollTop = newTop;
