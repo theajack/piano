@@ -4,7 +4,7 @@
             <i class='ei-music' @click='showSelect = true'></i>
             <i class='ei-repeat' @click='resetSong'></i>
         </div>
-        <div class='menu-select-song' v-show='showSelect'>
+        <div class='menu-select' v-show='showSelect'>
             <i class='ei-times' @click='showSelect = false'></i>
             <div class='menu-ss-item'
                  @click='chooseSong(index)'
