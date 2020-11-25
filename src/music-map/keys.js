@@ -167,3 +167,110 @@ let newKeyMap = ['', '1----', '1h----', '2----', '1---', '1h---', '2---', '2h---
 export function getNewKey (keyIndex) {
     return newKeyMap.indexOf(keyIndex);
 }
+
+export let freeKeyMap = {
+    'Q': {
+        'keyIndex': '4--',
+        'name': 'F2'
+    },
+    'W': {
+        'keyIndex': '5--',
+        'name': 'G2'
+    },
+    'E': {
+        'keyIndex': '6--',
+        'name': 'A2'
+    },
+    'R': {
+        'keyIndex': '7--',
+        'name': 'B2'
+    },
+    'T': {
+        'keyIndex': '1-',
+        'name': 'C3'
+    },
+    'Y': {
+        'keyIndex': '2-',
+        'name': 'D3'
+    },
+    'U': {
+        'keyIndex': '3-',
+        'name': 'E3'
+    },
+    'I': {
+        'keyIndex': '4-',
+        'name': 'F3'
+    },
+    'O': {
+        'keyIndex': '5-',
+        'name': 'G3'
+    },
+    'P': {
+        'keyIndex': '6-',
+        'name': 'A3'
+    },
+    'A': {
+        'keyIndex': '7-',
+        'name': 'B3'
+    },
+    'S': {
+        'keyIndex': '1',
+        'name': 'C4'
+    },
+    'D': {
+        'keyIndex': '2',
+        'name': 'D4'
+    },
+    'F': {
+        'keyIndex': '3',
+        'name': 'E4'
+    },
+    'G': {
+        'keyIndex': '4',
+        'name': 'F4'
+    },
+    'H': {
+        'keyIndex': '5',
+        'name': 'G4'
+    },
+    'J': {
+        'keyIndex': '6',
+        'name': 'A4'
+    },
+    'K': {
+        'keyIndex': '7',
+        'name': 'B4'
+    },
+    'L': {
+        'keyIndex': '1+',
+        'name': 'C5'
+    },
+    'Z': {
+        'keyIndex': '2+',
+        'name': 'D5'
+    },
+    'X': {
+        'keyIndex': '3+',
+        'name': 'E5'
+    },
+    'C': {
+        'keyIndex': '4+',
+        'name': 'F5'
+    },
+    'V': {
+        'keyIndex': '5+',
+        'name': 'G5'
+    },
+    'B': {
+        'keyIndex': '6+',
+        'name': 'A5'
+    },
+    'N': {
+        'keyIndex': '7+',
+        'name': 'B5'
+    },
+    'M': {
+        'keyIndex': '1++',
+        'name': 'C6'
+    }
+};

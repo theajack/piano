@@ -23,7 +23,7 @@
         },
         mounted () {
             initSize();
-            this.$store.commit('setSong', 0);
+            this.$store.commit('setSong', parseInt(localStorage.getItem('piano_song_index') || 0));
         }
     };
 </script>

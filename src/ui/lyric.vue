@@ -1,6 +1,16 @@
 <template>
     <div class='lyric-w'>
-        <div class='lyric-w-inner' :style='{"padding-bottom": `${offsetTop}px`, "padding-top": `${lyricTop}px`}' ref='scrollWrap'>
+        <div class='song-info' v-show='mode!==MODE.FREE'>
+            <div>《{{songName}}》</div>
+        </div>
+        <div class='song-info-mode'>{{modeName}}</div>
+        <div v-show='mode===MODE.FREE' class='mode-free-tip'>
+            <div>
+                <div>自 由 演 奏</div>
+                <div>Free Play</div>
+            </div>
+        </div>
+        <div v-show='mode!==MODE.FREE' class='lyric-w-inner' :style='{"padding-bottom": `${offsetTop}px`, "padding-top": `${lyricTop}px`}' ref='scrollWrap'>
             <div class='lyric-line' :class='{"active": scrollIndex === i}' v-for='(line, i) in lyric' :key='i'>
                 <div class='lyric-item'
                      :class='{actived: item.index < currentIndex, active: item.index === currentIndex - 1}'
@@ -13,9 +23,10 @@
     </div>
 </template>
 <script>
-    import {EVENT} from '../util/constant';
+    import {EVENT, MODE} from '../util/constant';
     import event from '../util/event';
     import {mapState} from 'vuex';
+
     export default {
         name: 'lyric',
         data () {
@@ -24,6 +35,7 @@
                 offsetTop: 55.6,
                 scrollIndex: 0,
                 scrollTop: 0,
+                MODE
             };
         },
         computed: {
@@ -31,10 +43,20 @@
                 'height'
             ]),
             ...mapState([
-                'currentIndex'
+                'currentIndex',
+                'mode',
+                'modes',
+                'songName'
             ]),
             lyricTop () {
                 return (this.height * 0.4 - this.offsetTop) / 2;
+            },
+            modeName () {
+                let res = this.modes.find(item => {
+                    return item.mode === this.mode;
+                });
+                if (res) {return res.name;}
+                return '';
             }
         },
         mounted () {
@@ -72,31 +94,35 @@
                     }
                 }
                 if (this.scrollIndex !== index) {
-                    this.scrollIndex = index;
-                    let el = this.$refs.scrollWrap;
-                    let newTop = index * this.offsetTop;
-                    if (newTop === 0) {
-                        el.scrollTop = 0;
-                        this.scrollTop = 0;
-                        return;
-                    }
-                    let n = Math.abs(newTop - this.scrollTop);
-                    let per = 1;
-
-                    let i = 0;
-                    let interval = setInterval(() => {
-                        i ++;
-                        if (i >= n) {
-                            el.scrollTop = newTop;
-                            clearInterval(interval);
-                            this.scrollTop = newTop;
-                        } else {
-                            el.scrollTop += per;
-                        }
-                    }, 10);
+                    this.$store.commit('setThisLineFirstIndex', this.currentIndex);
+                    this.scrollToLineIndex(index);
                 }
 
             },
+            scrollToLineIndex (index) {
+                this.scrollIndex = index;
+                let el = this.$refs.scrollWrap;
+                let newTop = index * this.offsetTop;
+                if (newTop === 0) {
+                    el.scrollTop = 0;
+                    this.scrollTop = 0;
+                    return;
+                }
+                let n = Math.abs(newTop - this.scrollTop);
+                let per = 1;
+
+                let i = 0;
+                let interval = setInterval(() => {
+                    i ++;
+                    if (i >= n) {
+                        el.scrollTop = newTop;
+                        clearInterval(interval);
+                        this.scrollTop = newTop;
+                    } else {
+                        el.scrollTop += per;
+                    }
+                }, 10);
+            }
         }
     };
 </script>

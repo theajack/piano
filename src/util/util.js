@@ -1,4 +1,5 @@
 import tool from 'easy-dom-util';
+import {toast as _toast} from 'tacl-ui';
 
 export let $ = tool;
 
@@ -38,4 +39,11 @@ export function random (a, b) {
 
 export function isPC () {
     return !(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent));
+}
+
+export function toast (text) {
+    _toast({
+        text: text,
+        position: 'top'
+    });
 }

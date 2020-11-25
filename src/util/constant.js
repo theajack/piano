@@ -1,6 +1,7 @@
 export const MODE = {
-    ANY: 0, //
-    LETTER: 1,
+    RIGHT: 0,
+    ANY: 1,
+    FREE: 2
 };
 
 export const EVENT = {
