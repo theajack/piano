@@ -43,6 +43,10 @@
                 <i v-show='item.choosed' class='ei-checked mode-select'></i>
             </div>
         </div>
+
+        <div class='toast-w' v-show='toastText !== ""'>
+            {{toastText}}
+        </div>
     </div>
 </template>
 <script>
@@ -66,6 +70,9 @@
                 'songData',
                 'modes',
                 'mode',
+            ]),
+            ...mapState('ui', [
+                'toastText'
             ])
         },
         mounted () {

@@ -1,6 +1,5 @@
 import tool from 'easy-dom-util';
-import {toast as _toast} from 'tacl-ui';
-
+import initStore from '../store';
 export let $ = tool;
 
 export function base64ToUint8Array (base64String) {
@@ -41,9 +40,12 @@ export function isPC () {
     return !(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent));
 }
 
+let toastTimer = null;
+
 export function toast (text) {
-    _toast({
-        text: text,
-        position: 'top'
-    });
+    clearTimeout(toastTimer);
+    initStore().commit('ui/setToast', text);
+    toastTimer = setTimeout(() => {
+        initStore().commit('ui/setToast', '');
+    }, 3000);
 }

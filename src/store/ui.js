@@ -4,7 +4,8 @@ export default {
         landscape: false,
         height: 0,
         width: 0,
-        mainStyle: {}
+        mainStyle: {},
+        toastText: ''
     },
     mutations: {
         initSize (state, {width, height, landscape = false}) {
@@ -18,6 +19,9 @@ export default {
             state.height = height;
             state.width = width;
             state.landscape = landscape;
+        },
+        setToast (state, text) {
+            state.toastText = text;
         }
     },
 };
