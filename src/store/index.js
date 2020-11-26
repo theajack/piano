@@ -16,7 +16,7 @@ let state = {
     mode: parseInt(localStorage.getItem('piano_mode') || MODE.RIGHT),
     modes: [
         {
-            choosed: true,
+            choosed: false,
             mode: MODE.RIGHT,
             name: '严格模式',
             desc: '必须按对对应的按键才可弹奏曲子'
@@ -35,6 +35,10 @@ let state = {
         },
     ]
 };
+
+
+changeMode();
+window.modes = state.modes;
 
 let getters = {
     currentIndex (state) {
@@ -77,6 +81,7 @@ let mutations = {
     },
     switchMode (state, mode) {
         state.mode = mode;
+        changeMode();
         this.commit('setCurrentIndex', 0);
         localStorage.setItem('piano_mode', mode);
     },
@@ -84,6 +89,16 @@ let mutations = {
         this.commit('setCurrentIndex', state.thisLineFirstIndex);
     }
 };
+
+function changeMode () {
+    state.modes.forEach(item => {
+        if (item.mode === state.mode) {
+            item.choosed = true;
+        } else {
+            item.choosed = false;
+        }
+    });
+}
 
 export default function () {
     if (!store) {

@@ -49,7 +49,7 @@
                 'songName'
             ]),
             lyricTop () {
-                return (this.height * 0.4 - this.offsetTop) / 2;
+                return (this.height * 0.45 - this.offsetTop) / 2;
             },
             modeName () {
                 let res = this.modes.find(item => {

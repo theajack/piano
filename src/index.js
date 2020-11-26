@@ -9,7 +9,9 @@ import initStore from './store';
 // import 'easy-icon';
 
 document.title = 'biu~';
+
 $.query('body').append($.create('div#pianoApp'));
+$.query('#loadingW').remove();
 
 new Vue({
     render: h => h(Main),

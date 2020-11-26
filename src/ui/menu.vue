@@ -35,7 +35,7 @@
         <div class='menu-select' v-show='showSelectMode'>
             <i class='ei-times' @click='showSelectMode = false'></i>
             <div class='menu-ss-item'
-                 @click='chooseMode(index)'
+                 @click='chooseMode(item)'
                  :class='{choosed: item.choosed}'
                  v-for='(item, index) in modes' :key='index'>
                 <span>{{item.name}}</span>
@@ -62,7 +62,6 @@
                 showSelectMode: false,
                 showSelect: false,
                 showTip: true,
-                modeIndex: 0,
             };
         },
         computed: {
@@ -90,14 +89,11 @@
                 this.$store.commit('setCurrentIndex', 0);
                 toast('已重置歌曲');
             },
-            chooseMode (index) {
-                if (index !== this.modeIndex) {
-                    this.modes[this.modeIndex].choosed = false;
-                    this.modes[index].choosed = true;
-                    this.modeIndex = index;
+            chooseMode (item) {
+                if (item.mode !== this.mode) {
                     this.showSelectMode = false;
-                    this.$store.commit('switchMode', this.modes[index].mode);
-                    toast(`已切换到${this.modes[index].name}`);
+                    this.$store.commit('switchMode', item.mode);
+                    toast(`已切换到${item.name}`);
                 }
             },
             resetThisLine () {
