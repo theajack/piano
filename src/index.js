@@ -11,7 +11,7 @@ import initStore from './store';
 document.title = 'biu~';
 
 $.query('body').append($.create('div#pianoApp'));
-$.query('#loadingW').remove();
+// $.query('#loadingW').remove();
 
 new Vue({
     render: h => h(Main),

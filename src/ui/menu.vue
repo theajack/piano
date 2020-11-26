@@ -93,7 +93,8 @@
                 if (item.mode !== this.mode) {
                     this.showSelectMode = false;
                     this.$store.commit('switchMode', item.mode);
-                    toast(`已切换到${item.name}`);
+                    
+                    toast(`已切换到${item.name}${item.mode === MODE.FREE ? ' 附《两只老虎》简谱' : ''}`);
                 }
             },
             resetThisLine () {

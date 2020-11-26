@@ -8,6 +8,10 @@
             <div>
                 <div>自 由 演 奏</div>
                 <div>Free Play</div>
+                <div class='sample-title'>两只老虎 两只老虎 跑的快 跑的快</div>
+                <div class='sample-key'>SDFS SDFS FGH FGH</div>
+                <div class='sample-title'>一只没有尾巴 一只没有眼睛 真奇怪 真奇怪</div>
+                <div class='sample-key'>HJHGFS HJHGFS DOS DOS</div>
             </div>
         </div>
         <div v-show='mode!==MODE.FREE' class='lyric-w-inner' :style='{"padding-bottom": `${offsetTop}px`, "padding-top": `${lyricTop}px`}' ref='scrollWrap'>
@@ -35,7 +39,12 @@
                 offsetTop: 55.6,
                 scrollIndex: 0,
                 scrollTop: 0,
-                MODE
+                MODE,
+                freeSample: [
+                    ['两只老虎两只老虎跑的快跑的快', '一只没有尾巴一只没有眼睛真奇怪真奇怪'],
+                    // ['12311231345345', '56543156543125-125-1'],
+                    ['SDFSSDFSFGHFGH', 'HJHGFSHJHGFSDOSDOS']
+                ]
             };
         },
         computed: {
