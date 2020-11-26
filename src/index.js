@@ -8,7 +8,7 @@ import Main from './ui/main.vue';
 import initStore from './store';
 // import 'easy-icon';
 
-document.title = 'biu~';
+// document.title = 'biu~';
 
 $.query('body').append($.create('div#pianoApp'));
 // $.query('#loadingW').remove();
