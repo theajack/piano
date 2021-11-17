@@ -1,6 +1,11 @@
 <template>
     <div class='menu-w'>
         <div class='menu-config-w'>
+            <div @click='goGithub'>
+                <span v-show='showTip' class='menu-config-tip'>Github<i class='ei-angle-right'></i></span>
+                <i class='menu-btn ei-github'></i>
+            </div>
+
             <div @click='showSelect = true' v-show='mode !== MODE.FREE'>
                 <span v-show='showTip' class='menu-config-tip'>切换歌曲<i class='ei-angle-right'></i></span>
                 <i class='menu-btn ei-music'></i>
@@ -100,6 +105,9 @@
             resetThisLine () {
                 this.$store.commit('resetThisLine');
                 toast('已重置当前行');
+            },
+            goGithub () {
+                window.open('https://github.com/theajack/piano');
             }
         }
     };
